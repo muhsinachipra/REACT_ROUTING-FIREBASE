@@ -1,20 +1,29 @@
 import './App.css'
-import About from './Container/About'
-import Profile from './Container/Profile'
 import { Routes, Route, useNavigate } from 'react-router-dom'
+import { Firebase } from './firebase/config'
+import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
+
 
 function App() {
 
-  const navigate = useNavigate()
-
   return (
-    <div className='App'>
-      <button onClick={() => navigate('/about')}>About</button>
-      <button onClick={() => navigate('/profile')}>Profile</button>
-      <Routes>
-        <Route element={<About />} path="/about" />
-        <Route element={<Profile />} path="/profile" />
-      </Routes>
+    <div className="App">
+      <button onClick={async () => {
+
+        const query = await getDocs(collection(getFirestore(Firebase), 'products'));
+        query.forEach((obj) => {
+          console.log(obj.data());
+        })
+
+        // const db = getFirestore(Firebase);
+        // const prodtCol = collection(db, 'products');
+        // const prodtSnapshot = await getDocs(prodtCol);
+        // const prodtList = prodtSnapshot.forEach((obj) => {
+        //   console.log(obj.data());
+        // })
+        // return prodtList
+
+      }}>click me</button>
     </div>
   )
 }
