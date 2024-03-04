@@ -10,8 +10,8 @@ function App() {
     <div className="App">
       <button onClick={async () => {
 
-        const query = await getDocs(collection(getFirestore(Firebase), 'products'));
-        query.forEach((obj) => {
+        const snapshot = await getDocs(collection(getFirestore(Firebase), 'products'));
+        snapshot.forEach((obj) => {
           console.log(obj.data());
         })
 
