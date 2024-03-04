@@ -1,25 +1,21 @@
 import './App.css'
 import About from './Container/About'
 import Profile from './Container/Profile'
-import { useState } from 'react'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 
 function App() {
 
-  const [state, setState] = useState('')
-  let componet
-  if (state === 'about') {
-    componet = <About />
-  }
-  if (state === 'profile') {
-    componet = <Profile />
-  }
+  const navigate = useNavigate()
 
   return (
-    <>
-      <button onClick={() => setState('about')}>about</button>
-      <button onClick={() => setState('profile')}>profile</button>
-      {componet}
-    </>
+    <div className='App'>
+      <button onClick={() => navigate('/about')}>About</button>
+      <button onClick={() => navigate('/profile')}>Profile</button>
+      <Routes>
+        <Route element={<About />} path="/about" />
+        <Route element={<Profile />} path="/profile" />
+      </Routes>
+    </div>
   )
 }
 
